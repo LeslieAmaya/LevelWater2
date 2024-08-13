@@ -97,15 +97,15 @@ class Usuarios extends React.Component {
       <div className="col-10 card ml-5 p-5 shadow-lg">
         <div className="row">
           <div className="col-md-6 d-none d-lg-block h-screen">
-            <table border="2" className="table">
+            <table border="2" class="table table-striped">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Contraseña</th>
-                  <th>Rol</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Usuario</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Contraseña</th>
+                  <th scope="col">Rol</th>
                 </tr>
               </thead>
               <tbody>

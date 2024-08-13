@@ -111,13 +111,10 @@ h3{
 .custom-table {
   min-width: 300px;
   max-width: 60%;
-  background: rgba(255, 255, 255, 0.15);
   padding: 2rem 3rem;
   margin-left: 800px;
-  border-radius: 2.5rem;
   background-color: #ecf0f3;
   box-shadow: 13px 13px 10px #cbced1, -13px -13px 20px #ffffff;
-  color: black;
 
 }
 .custom-input {
