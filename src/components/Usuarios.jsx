@@ -2,7 +2,8 @@ import React from "react";
 import "../App.css";
 import axios from "axios";
 
-const url = "https://apimongo-xso0.onrender.com/api";
+const url = "https://apilw.onrender.com/api";
+// const url = "https://apimongo-xso0.onrender.com/api";
 // const url = "http://localhost:3001/api";
 class Usuarios extends React.Component {
   constructor(props) {
@@ -11,11 +12,13 @@ class Usuarios extends React.Component {
       User: [],
       id: "",
       username: "",
+      name: "",
       password: "",
       lastname: "",
       rol: "",
     };
     this.handlerUsuario = this.handlerUsuario.bind(this);
+    this.handlerName = this.handlerName.bind(this);
     this.handlerPassword = this.handlerPassword.bind(this);
     this.handlerLastname = this.handlerLastname.bind(this);
     this.handlerRol = this.handlerRol.bind(this);
@@ -27,6 +30,9 @@ class Usuarios extends React.Component {
 
   handlerUsuario(event) {
     this.setState({ username: event.target.value });
+  }
+  handlerName(event) {
+    this.setState({ name: event.target.value });
   }
   handlerLastname(event) {
     this.setState({ lastname: event.target.value });
@@ -45,6 +51,8 @@ class Usuarios extends React.Component {
       this.setState({ User: Response.data });
     });
   }
+
+
   BorrarDatos() {
     axios.delete(url + "/user/" + this.state.username).then((Response) => {
       this.cargarDatos();
@@ -54,8 +62,11 @@ class Usuarios extends React.Component {
   GuardarDatos() {
     let us = {
       username: this.state.username,
+      name: this.state.name,
+      lastname: this.state.lastname,
       password: this.state.password,
-      
+      rol: this.state.rol
+
     };
     if (this.state.id === "") {
       axios.post(url + "/user", us).then((Response) => {
@@ -72,6 +83,7 @@ class Usuarios extends React.Component {
   LimpiarDatos = () => {
     this.setState({ id: "" });
     this.setState({ username: "" });
+    this.setState({ name: "" });
     this.setState({ rol: "" });
     this.setState({ lastname: "" });
     this.setState({ password: "" });
@@ -84,8 +96,8 @@ class Usuarios extends React.Component {
     return (
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-xl-10 col-lg-12 col-md-9">
-            <div className="card o-hidden border-0 shadow-lg my-5">
+          <div className="col-xl-10 col-lg-12 col-md-12">
+            <div className="card o-hidden border-0 shadow-lg my-3">
               <div className="row">
                 <div className="col-lg-6 d-none d-lg-block h-screen">
                   <table border="2" className="table">
@@ -93,6 +105,10 @@ class Usuarios extends React.Component {
                       <tr>
                         <th>ID</th>
                         <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Contraseña</th>
+                        <th>Rol</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -101,15 +117,19 @@ class Usuarios extends React.Component {
                           <tr key={i}>
                             <td>{user._id}</td>
                             <td>{user.username}</td>
+                            <td>{user.name}</td>
+                            <td>{user.lastname}</td>
+                            <td>{user.password}</td>
+                            <td>{user.rol}</td>
                           </tr>
                         );
                       })}
                     </tbody>
                   </table>
                 </div>
-                <div className="col-lg-6">
+                <div className="col-5">
                   <div className="p-5">
-                    <br />
+                    <br/>
                     <div className="text-center">
                       <h2 className="h4 text-gray-900 mb-4">USUARIOS</h2>
                     </div>
@@ -130,6 +150,14 @@ class Usuarios extends React.Component {
                           placeholder="Ingresar Usuario"
                           className="form-control form-control-user"
                           onChange={this.handlerUsuario}
+                        />
+                        <br />
+                        <input
+                          value={this.state.name}
+                          type="text"
+                          placeholder="Ingresar Nombre"
+                          className="form-control form-control-user"
+                          onChange={this.handlerName}
                         />
                         <br />
                         <input
@@ -191,9 +219,12 @@ class Usuarios extends React.Component {
 
                       <br />
                       <br />
+
                       <div className="text-center">
                         <label> Level Water 2024 </label>
                       </div>
+
+
                     </div>
                   </div>
                 </div>
@@ -202,7 +233,7 @@ class Usuarios extends React.Component {
           </div>
         </div>
       </div>
-    );
-  }
+    )
+  };
 }
 export default Usuarios;
