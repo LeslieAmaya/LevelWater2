@@ -4643,7 +4643,7 @@ input[type="button"].btn-block {
 }
 
 .card {
-  position: fixed;
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
