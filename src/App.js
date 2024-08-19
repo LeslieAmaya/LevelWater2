@@ -3,8 +3,8 @@ import "./App.css";
 import Login from "./components/Login";
 import Menu from "./components/Menu";
 import Usuarios from "./components/Usuarios";
-import CampainPage from "./pages/CampainPage/CampainPage";
-import ContagiosPage from "./pages/ContagiosPage/ContagiosPage";
+import Consumo from "./pages/Consumo/Consumo";
+import Nivel from "./pages/Nivel/Nivel";
 
 var x = localStorage.getItem("user");
 
@@ -22,9 +22,9 @@ function App() {
         {/* <Route path="/Vacio" element={<Vacio />}></Route> */}
         {/* <Route path="/Informacion" element={<Informacion />} /> */}
         <Route path="/Usuarios" element={<Usuarios />} />
-        <Route path="/Nivel" element={<ContagiosPage />} />
+        <Route path="/Nivel" element={<Nivel />} />
         {/* <Route path="/ContagiosForm" element={<ContagiosForm />} /> */}
-        <Route path="/Graficas" element={<CampainPage />} />
+        <Route path="/Consumo" element={<Consumo />} />
         {/* <Route path="/CampanasForm" element={<CampainForm />} /> */}
       </Routes>
     </div>

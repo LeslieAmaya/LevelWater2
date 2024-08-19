@@ -26,7 +26,7 @@ class Login extends React.Component {
     //AXIOS peticiones a URLs
     try {
       const response = await axios.post(
-        "https://apimongo-xso0.onrender.com/api/login",
+        "https://apilw.onrender.com/api/login",
         { username: this.state.usuario, password: this.state.password }
       );
 
