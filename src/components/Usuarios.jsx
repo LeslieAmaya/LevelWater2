@@ -245,7 +245,8 @@ class Usuarios extends React.Component {
           </div>
           {/* <div className="card o-hidden border-0 shadow-lg my-3">
           </div> */}
-        </div>
+        </div>    
+        
       </div>
     );
   }
