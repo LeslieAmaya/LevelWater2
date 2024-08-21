@@ -9,6 +9,7 @@ class Login extends React.Component {
       usuario: "",
       password: "",
       mensaje: "",
+      rol: "",
     };
     this.handlerUsuario = this.handlerUsuario.bind(this);
     this.handlerPassword = this.handlerPassword.bind(this);
@@ -21,6 +22,7 @@ class Login extends React.Component {
   handlerPassword(event) {
     this.setState({ password: event.target.value });
   }
+ 
 
   validarUsuario = async () => {
     //AXIOS peticiones a URLs
@@ -33,10 +35,17 @@ class Login extends React.Component {
       console.log("Respuesta", response.data);
       localStorage.setItem("user", response.data.username);
       localStorage.setItem("pass", response.data.password);
-      localStorage.setItem("rol", response.data.rol);
+      localStorage.setItem("rol",  response.data.rol);
+
+      if (response.data.rol === 0) {
+        window.location.href = "/Usuarios";
+      } else{
+        window.location.href = "/Nivel";
+
+      }
     } catch (err) {
       alert("Usuario y/o contraseña incorrectos");
-      this.setState(); //te manda el error de la api
+      this.setState(); 
     }
   };
   render() {

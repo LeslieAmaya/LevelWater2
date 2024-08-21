@@ -16,16 +16,6 @@ class Nivel extends React.Component {
       fecha: "",
       consumo: "",
     };
-
-    // this.handlerUsuario = this.handlerUsuario.bind(this);
-    // this.handlerName = this.handlerName.bind(this);
-    // this.handlerPassword = this.handlerPassword.bind(this);
-    // this.handlerLastname = this.handlerLastname.bind(this);
-    // this.handlerRol = this.handlerRol.bind(this);
-    // this.handlerId = this.handlerId.bind(this);
-    // // CRUD
-    // this.GuardarDatos = this.GuardarDatos.bind(this);
-    // this.BorrarDatos = this.BorrarDatos.bind(this);
   }
 
   handlerConsumo(event) {
@@ -34,9 +24,7 @@ class Nivel extends React.Component {
   handlerfecha(event) {
     this.setState({ fecha: event.target.value });
   }
-  // handlerLastname(event) {
-  //   this.setState({ lastname: event.target.value });
-  // }
+
   cargarDatos() {
     axios.get(url + "/consume").then((Response) => {
       this.setState({ Consumo: Response.data });
@@ -46,14 +34,12 @@ class Nivel extends React.Component {
     const { intervaloActivo, intervalId } = this.state;
 
     if (intervaloActivo) {
-      // Detener el intervalo
       clearInterval(intervalId);
       this.setState({ intervaloActivo: false, intervalId: null });
     } else {
-      // Iniciar el intervalo
       const id = setInterval(() => {
         this.guardarConsumo();
-      }, 10000); // 30 segundos
+      }, 10000);
 
       this.setState({ intervaloActivo: true, intervalId: id });
     }
@@ -77,14 +63,6 @@ class Nivel extends React.Component {
     }
   }
 
-  // LimpiarDatos = () => {
-  //   this.setState({ id: "" });
-  //   this.setState({ username: "" });
-  //   this.setState({ name: "" });
-  //   this.setState({ rol: "" });
-  //   this.setState({ lastname: "" });
-  //   this.setState({ password: "" });
-  // };
   componentDidMount() {
     this.cargarDatos();
   }
@@ -96,12 +74,12 @@ class Nivel extends React.Component {
     );
     const cons = limite - total;
     const porcentajeLimite = (cons / limite) * 100;
+
     const dataSource = this.state.Consumo.map((consume) => ({
-      key: consume._id, // Agregar un 'key' único para cada fila
+      key: consume._id,
       consumo: consume.consumo,
       fecha: consume.Fecha,
     }));
-    console.log(total);
 
     const config = {
       data: dataSource,
@@ -110,10 +88,10 @@ class Nivel extends React.Component {
       legend: false,
       style: {
         fill: ({ consumo }) => {
-          if (consumo <  '300' ) {
-            return '#32a84e';
+          if (consumo < "300") {
+            return "#32a84e";
           }
-          return '#8f0000';
+          return "#8f0000";
         },
       },
     };
@@ -132,9 +110,9 @@ class Nivel extends React.Component {
                 precision={2}
                 valueStyle={{
                   color:
-                    limite > 6000
+                    cons > 6000
                       ? "#3f8600" // green
-                      : limite >= 3000
+                      : limite < 5999
                       ? "#ffa07a" // orange
                       : "#ff0000", // red
                 }}
@@ -151,11 +129,11 @@ class Nivel extends React.Component {
                 precision={2}
                 valueStyle={{
                   color:
-                    limite > 6000
-                      ? "#3f8600" // green
-                      : limite >= 3000
-                      ? "#ffa07a" // orange
-                      : "#ff0000", // red
+                    porcentajeLimite < 30
+                      ? "#ff0000" // rojo
+                      : porcentajeLimite <= 60
+                      ? "#ffa07a" // naranja
+                      : "#3f8600", // verde
                 }}
                 prefix={<ArrowDownOutlined />}
                 suffix="%"
@@ -163,7 +141,7 @@ class Nivel extends React.Component {
             </Card>
           </Col>
           <Col span={8}>
-          <Button type="primary" onClick={this.toggleIntervalo}>
+            <Button type="primary" onClick={this.toggleIntervalo}>
               {intervaloActivo ? "Detener Consumo" : "Iniciar Consumo"}
             </Button>
           </Col>
@@ -172,7 +150,7 @@ class Nivel extends React.Component {
     );
   }
   guardarConsumo() {
-    const consumo = Math.floor(Math.random()* 350) + 1;
+    const consumo = Math.floor(Math.random() * 350) + 1;
     const fechaActual = new Date();
     const fechaFormateada = `${fechaActual.getFullYear()}-${String(
       fechaActual.getMonth() + 1

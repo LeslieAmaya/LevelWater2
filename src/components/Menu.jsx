@@ -13,11 +13,14 @@ class Menu extends React.Component {
       window.location.href = "/";
     }, 1000);
   }
+
   render() {
+    const rol = localStorage.getItem("rol");
+
     return (
       <div className="d-flex flex-column">
         <img
-         alt="Level Water logo"
+          alt="Level Water logo"
           src="https://i.ibb.co/mhNXRpj/LOGO-LEVEL-WATER.png"
           style={{ height: 200 }}
         />
@@ -30,10 +33,12 @@ class Menu extends React.Component {
           {" "}
           Información{" "}
         </Link> */}
-        <Link to="/Usuarios" className="btn btn-primary m-1">
+        {rol !== "1" && (
+          <Link to="/Usuarios" className="btn btn-primary m-1">
           {" "}
           Usuarios{" "}
         </Link>
+        )}
         <Link to="/Nivel" className="btn btn-primary m-1">
           {" "}
           Nivel{" "}
