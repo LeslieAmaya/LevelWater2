@@ -33,7 +33,7 @@ class Login extends React.Component {
       console.log("Respuesta", response.data);
       localStorage.setItem("user", response.data.username);
       localStorage.setItem("pass", response.data.password);
-      window.location.href = "/Usuarios";
+      localStorage.setItem("rol", response.data.rol);
     } catch (err) {
       alert("Usuario y/o contraseña incorrectos");
       this.setState(); //te manda el error de la api
